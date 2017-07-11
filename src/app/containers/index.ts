@@ -1,3 +1,4 @@
-export { NoteCardContainer } from './notes.component';
-export { About } from './about.component';
-export { Auth } from './auth.component';
+export { NoteCardContainer } from './notes';
+export { About } from './about';
+export { Auth } from './auth';
+export { ChatClient } from './chatClient';

@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const helpers = require('./helper');
 
 let database = {
@@ -14,15 +12,6 @@ let database = {
 }
 
 let notesArr = [{title: 'hi', value: 'hello', color: 'blue'}];
-
-passport.use(new LocalStrategy(
-  (username, password, cb) => {
-    let user = Object.keys(database).find( elem => elem === username);
-    if (!user) { return cb(null, false) };
-    if (database[user].password !== password) { return cb(null, false) };
-    return cb(null, database[user])
-  }
-));
 
 router.post('/getnotes', (req, res) => {
   const token = req.body.jwt;

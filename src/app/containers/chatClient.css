@@ -1,0 +1,11 @@
+.messageBox {
+  top: 66px;
+  height: 400px;
+  width: 400px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.textBox {
+  border: 1px solid black;
+}

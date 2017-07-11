@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { App } from './app.component';
 import { AppBar, NoteCard, NoteCreator, ColorPicker } from './ui';
-import { NoteCardContainer, About, Auth } from './containers';
+import { NoteCardContainer, About, Auth, ChatClient } from './containers';
 import { ApiService, NoteService, StoreService, AuthService } from './services';
 import { routes } from './router';
 import { Store } from './store';
@@ -18,7 +18,8 @@ import { Store } from './store';
     NoteCreator,
     ColorPicker,
     About,
-    Auth
+    Auth,
+    ChatClient
   ],
   imports: [
     BrowserModule,

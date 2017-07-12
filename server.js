@@ -13,7 +13,9 @@ const server = app.listen(port);
 const io = require('socket.io').listen(server);
 
 // fake db
-let messages = [];
+let messages = [
+  {user: 'wilson', text: 'hello'}
+];
 
 // app setup
 app.use( (req, res, next) => {
@@ -38,6 +40,8 @@ app.get('*', (req, res) => {
 //socket
 io.on('connection', socket => {
   console.log('user connected');
+  socket.emit('new-message', messages);
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });

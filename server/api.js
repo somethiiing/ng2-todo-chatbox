@@ -13,6 +13,14 @@ let database = {
 
 let notesArr = [{title: 'hi', value: 'hello', color: 'blue'}];
 
+router.post('/getuser', (req, res) => {
+  const token = req.body.jwt;
+  jwt.verify(token, 'secret', (err, decoded) => {
+    if (err) { console.log(err) }
+    res.send({user: decoded.username})
+  })
+})
+
 router.post('/getnotes', (req, res) => {
   const token = req.body.jwt;
   jwt.verify(token, 'secret', (err, decoded) => {

@@ -9,7 +9,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class AuthService implements CanActivate {
 
-  JWT_KEY: string = 'notes_token';
+  JWT_KEY: string = 'ng2_chall_token';
+  USER_KEY: string = 'ng2_chall_user';
 
   constructor(
     private router: Router,
@@ -19,10 +20,10 @@ export class AuthService implements CanActivate {
   ) {
     const token = window.localStorage.getItem(this.JWT_KEY);
 
-    if (token) { this.setJwt(token) }
+    if (token) { this.setLocalData(token) }
   }
 
-  setJwt(jwt: string) {
+  setLocalData(jwt: string) {
     window.localStorage.setItem(this.JWT_KEY, jwt);
     this.apiService.setHeaders({Authorization: `Bearer ${jwt}`});
   }
@@ -47,7 +48,7 @@ export class AuthService implements CanActivate {
     return this.apiService.post(`/${path}`, credits)
       .do(res => {
         if (res.token !== null) {
-          this.setJwt(res.token)
+          this.setLocalData(res.token)
           const data = { user: res.data, jwt: res.token };
           this.storeService.update('user', data);
         }

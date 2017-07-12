@@ -10,6 +10,11 @@ export class NoteService {
     private storeService: StoreService
   ) {}
 
+  getUser(jwt: string) {
+    return this.api.post('/getuser', {jwt: jwt} )
+      .do(resp => this.storeService.update('user', resp));
+  }
+
   getNotes(jwt: string) {
     return this.api.post('/getnotes', {jwt: jwt} )
       .do(resp => this.storeService.update('notes', resp));

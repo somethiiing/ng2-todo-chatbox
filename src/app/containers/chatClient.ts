@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services';
+import { ApiService, StoreService, NoteService } from '../services';
+import { Store } from '../store';
 import * as io from 'socket.io-client';
 
 @Component({
   selector: 'chat-client',
   template: `
     <div class="chatClient">
-      <p *ngIf="this.message.user === '' ">To begin, enter your username and hit submit!</p>
       <div
         #messageBox
         class="messageBox"
         [scrollTop]="messageBox.scrollHeight"
-        *ngIf="this.message.user !== '' "
       >
         <p *ngFor="let message of messages">{{message.user}}: {{message.text}}</p>
       </div>
@@ -25,16 +24,9 @@ import * as io from 'socket.io-client';
             name="message"
           >
           <button
-            *ngIf="message.user !== '' "
-            type="submit"
-            [disabled]="message.text.length < 1"
-          >Send
-          </button>
-          <button
-            *ngIf="message.user === '' "
             type="text"
             [disabled]="message.text.length < 1"
-          >Submit
+          >Send!
           </button>
         </form>
       </div>
@@ -50,24 +42,33 @@ export class ChatClient implements OnInit {
     user: ''
   }
   socket;
+  token;
 
-  constructor() { }
+  constructor(
+    private store: Store,
+    private storeService: StoreService,
+    private noteService: NoteService
+  ) { }
 
   ngOnInit() {
-    this.socket = io();
+    this.store.changes
+      .do(data => console.log(data))
+      .filter(data => data && data.user && data.user.user)
+      .map(data => data.user.user)
+      .subscribe(username => this.message.user = username );
 
+    this.token = window.localStorage.getItem('notes_token');
+    this.noteService.getUser(this.token).subscribe();
+
+    this.socket = io();
     this.socket.on('new-message', function (data) {
       this.messages = data;
+      console.log(data);
     }.bind(this));
   }
 
   onSubmit() {
-    if (this.message.user === '') {
-      this.message.user = this.message.text;
-      this.socket.emit('add-message', {user: 'ChatBot', text: `${this.message.user} has just joined the room!`})
-    } else {
-      this.socket.emit('add-message', this.message);
-    }
+    this.socket.emit('add-message', this.message);
     this.message.text = '';
   }
 

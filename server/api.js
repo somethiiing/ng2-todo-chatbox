@@ -47,7 +47,7 @@ router.post('/deletenote', (req, res) => {
   jwt.verify(token, 'secret', (err, decoded) => {
     if (err) { console.log(err) }
     const username = decoded.username;
-    const index = database[username].notes.findIndex(elem => elem === note);
+    const index = database[username].notes.findIndex(elem => elem.value === note.value && elem.title === note.title);
     const result = database[username].notes.splice(index, 1);
     res.send(result[0]);
   });

@@ -9,7 +9,8 @@ export class ApiService {
     Accept: 'application/json'
   });
 
-  api_url: String = 'https://quiet-badlands-27534.herokuapp.com/api';
+  api_url: string = 'https://quiet-badlands-27534.herokuapp.com/api';
+  // api_url: string = 'http://localhost:3000/api';
 
   constructor(private http: Http) { }
 

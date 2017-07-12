@@ -1,6 +1,6 @@
 # Ng2-todo-chatbox
 
-* [Demo](https://quiet-badlands-27534.herokuapp.com/) Deployed to Heroku.
+* [Demo](https://quiet-badlands-27534.herokuapp.com/){:target="_blank"} Deployed to Heroku.
 
 ## Features
 * Login Functionality

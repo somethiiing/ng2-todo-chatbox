@@ -43,7 +43,7 @@ export class NoteCardContainer implements OnInit {
       .map(data => data.notes)
       .subscribe(notes => this.notes = notes );
 
-    this.token = window.localStorage.getItem('notes_token');
+    this.token = window.localStorage.getItem('ng2_chall_token');
     this.noteService.getNotes(this.token).subscribe();
   }
 

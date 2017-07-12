@@ -14,7 +14,7 @@ const io = require('socket.io').listen(server);
 
 // fake db
 let messages = [
-  {user: 'wilson', text: 'hello'}
+  {user: 'ChatBot', text: 'Just start talking!'}
 ];
 
 // app setup

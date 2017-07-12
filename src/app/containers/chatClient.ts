@@ -57,7 +57,7 @@ export class ChatClient implements OnInit {
       .map(data => data.user.user)
       .subscribe(username => this.message.user = username );
 
-    this.token = window.localStorage.getItem('notes_token');
+    this.token = window.localStorage.getItem('ng2_chall_token');
     this.noteService.getUser(this.token).subscribe();
 
     this.socket = io();

@@ -4,6 +4,8 @@
 
 ## Features
 * Login Functionality
+* Todo app for taking notes. Notes persist until server reset.
+* Chat app for talking to a group of people. (whoever is logged in).
 * Ng Router for site rerouting
 * Socket IO for instant chat communication
 * NodeJS server to handle local authentication, note creation
